@@ -2,8 +2,8 @@
 
 import System.Directory
 import Graphics.Vty
-import Data.Default (def)
 import Control.Monad.RWS
+--import Data.Default (def)
 import Data.List.PointedList hiding (length)
 import Data.List (sort)
 import qualified Data.Map as M
@@ -31,7 +31,9 @@ updateState = do
 
 main :: IO ()
 main = do
-    vty <- mkVty def
+    cfg <- standardIOConfig
+    vty <- mkVty cfg
+    --vty <- mkVty def
     state' <- updateState
     (_finalState, ()) <- execRWST update' vty state'
     shutdown vty
